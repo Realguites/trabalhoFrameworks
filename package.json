@@ -1,0 +1,27 @@
+{
+   "name": "ponto",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "type": "commonjs",
+   "devDependencies": {
+      "@types/node": "^16.11.10",
+      "ts-node": "10.7.0",
+      "typescript": "4.5.2"
+   },
+   "dependencies": {
+      "bcrypt": "^5.1.0",
+      "cors": "^2.8.5",
+      "dotenv": "^16.0.3",
+      "express": "^4.18.2",
+      "jsonwebtoken": "^8.5.1",
+      "mongodb": "^3.0.8",
+      "nodemon": "^2.0.20",
+      "reflect-metadata": "^0.1.13",
+      "Router": "^2.1.0",
+      "typeorm": "0.3.10"
+   },
+   "scripts": {
+      "start": "nodemon src/server.ts",
+      "typeorm": "typeorm-ts-node-commonjs"
+   }
+}
