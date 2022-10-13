@@ -13,6 +13,6 @@ export default class Departamento {
     @Column()
     sala: number
 
-    @OneToMany(() => Funcionario, (funcionario) => funcionario.departamento)
-    funcionario: Funcionario[]
+    @Column((type) => Funcionario)
+    funcionarios: Funcionario[]
 }

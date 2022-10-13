@@ -30,18 +30,7 @@ classRouter.get('/',login, async(req, res)=>{
 
 classRouter.post('/',login, async(req, res)=>{
   try{  
-    console.log(req.body)
-    
-    /*const funcionario = new Funcionario()
-    funcionario.nome = req.body?.nome
-    funcionario.sobrenome = req.body?.sobrenome
-    funcionario.age = req.body?.age*/
-
     const funcionario = await AppDataSource.manager.getRepository(Funcionario).save(req.body)
- 
-      //await AppDataSource.manager.save(funcionario)
-
-    
     return res.status(200).json(funcionario);
   }catch(err){
     return res.status(400).json("Erro ao executar " + err);
@@ -50,8 +39,41 @@ classRouter.post('/',login, async(req, res)=>{
 
 classRouter.get('/:id',login, async(req, res)=>{
   try{ 
-    const funcionario = await AppDataSource.manager.getRepository(Funcionario).findOne(req.params._id)
+    const funcionario = await AppDataSource.manager.getRepository(Funcionario).findOne(req.params.id)
     return res.status(200).json(funcionario);
+
+  }catch(err){
+    return res.status(400).json("Erro ao executar " + err);
+  }
+})
+
+classRouter.put('/:id',login, async(req, res)=>{
+  try{ 
+    const funcionario = await AppDataSource.manager.getRepository(Funcionario).findOne(req.params.id)
+    if(funcionario){
+      const updatedFuncionario = await AppDataSource.manager.getRepository(Funcionario).save({
+      ...funcionario,
+      ...req.body
+      })
+      return res.status(200).json(updatedFuncionario);
+    }
+    
+    return res.status(204).json('Funcionário não encontrado!!');
+
+  }catch(err){
+    return res.status(400).json("Erro ao executar " + err);
+  }
+})
+
+classRouter.delete('/:id',login, async(req, res)=>{
+  try{ 
+    const funcionario = await AppDataSource.manager.getRepository(Funcionario).findOne(req.params.id)
+    if(funcionario){
+      await AppDataSource.manager.getRepository(Funcionario).delete(req.params.id)
+      return res.status(204).json('Funcionario Excluido');
+    }else{
+      return res.status(400).json('Funcionário não encontrado!');
+    }
     
 
   }catch(err){

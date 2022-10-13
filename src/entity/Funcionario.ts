@@ -15,8 +15,4 @@ export default class Funcionario {
 
     @Column()
     age: number
-
-    @ManyToOne(() => Departamento, (departamento) => departamento.funcionario, {eager:true})
-    departamento: Departamento
-
 }
