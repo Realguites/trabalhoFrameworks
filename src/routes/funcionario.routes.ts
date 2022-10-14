@@ -74,8 +74,6 @@ classRouter.delete('/:id',login, async(req, res)=>{
     }else{
       return res.status(400).json('Funcionário não encontrado!');
     }
-    
-
   }catch(err){
     return res.status(400).json("Erro ao executar " + err);
   }

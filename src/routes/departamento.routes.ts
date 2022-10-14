@@ -53,5 +53,39 @@ classRouter.post('/',login, async(req, res)=>{
   }
 })
 
+classRouter.put('/:id',login, async(req, res)=>{
+  try{ 
+    console.log('ODIO ', req.body)
+    const departamento = await AppDataSource.manager.getRepository(Departamento).findOne(req.params.id)
+    console.log(departamento)
+    if(departamento){
+      const updatedDepartamento = await AppDataSource.manager.getRepository(Departamento).save({
+      ...departamento,
+      ...req.body
+      })
+      return res.status(200).json(updatedDepartamento);
+    }
+    
+    return res.status(204).json('Departamento não encontrado!!');
+
+  }catch(err){
+    return res.status(400).json("Erro ao executar " + err);
+  }
+})
+
+classRouter.delete('/:id',login, async(req, res)=>{
+  try{ 
+    const departamento = await AppDataSource.manager.getRepository(Departamento).findOne(req.params.id)
+    if(departamento){
+      await AppDataSource.manager.getRepository(Departamento).delete(req.params.id)
+      return res.status(204).json('Departamento Excluido');
+    }else{
+      return res.status(400).json('Departamento não encontrado!');
+    }
+  }catch(err){
+    return res.status(400).json("Erro ao executar " + err);
+  }
+})
+
 
 export default classRouter;
