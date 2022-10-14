@@ -45,7 +45,6 @@ classRouter.get('/:id',login, async(req, res)=>{
 
 classRouter.post('/',login, async(req, res)=>{
   try{
-    await console.log("sadasdsa", req.body)  
     await AppDataSource.manager.getRepository(Departamento).save(req.body)
     return res.status(204).json("");
   }catch(err){
@@ -55,7 +54,6 @@ classRouter.post('/',login, async(req, res)=>{
 
 classRouter.put('/:id',login, async(req, res)=>{
   try{ 
-    console.log('ODIO ', req.body)
     const departamento = await AppDataSource.manager.getRepository(Departamento).findOne(req.params.id)
     console.log(departamento)
     if(departamento){
